@@ -9,7 +9,6 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
     navigate(`chat?name=${form.name}&room=${form.room}`);
   };
 

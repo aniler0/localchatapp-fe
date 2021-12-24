@@ -1,13 +1,12 @@
+import { PaperPlane } from "components/Icons";
 import React from "react";
 import * as S from "./styles";
 
 type InputProps = {
-  children?: string;
   placeholder?: string;
   loginField?: boolean;
   passwordField?: boolean;
   textMessageField?: boolean;
-  getMessageField?: boolean;
   icon?: React.ReactNode;
   name: string;
   value: string;
@@ -15,9 +14,7 @@ type InputProps = {
 };
 
 const Input: React.FC<InputProps> = ({
-  textMessageField,
-  getMessageField,
-  children,
+  textMessageField = false,
   placeholder,
   icon,
   name,
@@ -25,7 +22,7 @@ const Input: React.FC<InputProps> = ({
   onChange,
 }) => {
   return (
-    <S.Container>
+    <S.Container textMessageField={textMessageField}>
       <S.InputWrapper>
         {icon}
         <S.Input
@@ -34,8 +31,14 @@ const Input: React.FC<InputProps> = ({
           type="text"
           placeholder={placeholder}
           onChange={onChange}
+          textMessageField={textMessageField}
           required
+          autoComplete="off"
         />
+
+        {textMessageField && (
+          <S.StyledPaperPlane value={value ? true : false} />
+        )}
       </S.InputWrapper>
     </S.Container>
   );
