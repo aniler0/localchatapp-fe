@@ -2,11 +2,8 @@ import { Kebab } from "components/Icons";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-  position: absolute;
+  position: relative;
   height: 50px;
-  left: 0px;
-  right: 0px;
-  top: 0px;
   box-shadow: inset 0px -1px 0px #e5e5ea;
   display: flex;
   flex-direction: row;

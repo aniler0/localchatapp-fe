@@ -9,12 +9,16 @@ export const ChatContainer = styled.div`
   height: 100vh;
   background: #ffffff;
   box-shadow: inset 1px 0px 0px #e5e5ea;
-`;
+  `;
 export const Chat = styled.div`
-  position: relative;
-  width: 50%;
-  height: 90%;
-  box-shadow: 0px 0px 20px 2px #e5e5ea;
+ 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 90%;
+    box-shadow: 0px 0px 20px 2px #e5e5ea;
+  
   @media screen and (max-width: 768px) {
     width: 100%;
     height: 100%;

@@ -1,4 +1,3 @@
-import { PaperPlane } from "components/Icons";
 import React from "react";
 import * as S from "./styles";
 
@@ -11,6 +10,7 @@ type InputProps = {
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  sendMessage?:any
 };
 
 const Input: React.FC<InputProps> = ({
@@ -20,6 +20,7 @@ const Input: React.FC<InputProps> = ({
   name,
   value,
   onChange,
+  sendMessage
 }) => {
   return (
     <S.Container textMessageField={textMessageField}>
@@ -37,7 +38,7 @@ const Input: React.FC<InputProps> = ({
         />
 
         {textMessageField && (
-          <S.StyledPaperPlane value={value ? true : false} />
+          <S.StyledPaperPlane onClick={sendMessage} value={value ? true : false} />
         )}
       </S.InputWrapper>
     </S.Container>

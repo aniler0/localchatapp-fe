@@ -24,6 +24,7 @@ export const Form = styled.form`
   align-items: center;
   height: 50%;
   width: 70%;
+  max-width:600px ;
 `;
 
 export const InputContainer = styled.div`
@@ -35,7 +36,7 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 export const InputField = styled.div`
-  height: 100%;
+  height: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;

@@ -7,6 +7,7 @@ type ContainerProps = {
 
 type StyledPaperPlaneProps = {
   value: boolean;
+  onClick:any
 };
 
 export const Container = styled.div<ContainerProps>`
@@ -15,10 +16,6 @@ export const Container = styled.div<ContainerProps>`
       ? css`
           padding: 0.3em;
           box-shadow: inset 0px 1px 0px #e5e5ea;
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
 
           @media screen and (max-width: 768px) {
             padding: 0.8em;
