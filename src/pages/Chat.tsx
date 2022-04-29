@@ -12,10 +12,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 let socket: any;
 const ENDPOINT: string = process.env.REACT_APP_ENDPOINT as string;
-socket = io(ENDPOINT);
+socket = io(ENDPOINT, {
+  withCredentials: true,
+});
 
 const Chat = () => {
-  console.log(process.env.REACT_APP_ENDPOINT);
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [searchParams] = useSearchParams();
