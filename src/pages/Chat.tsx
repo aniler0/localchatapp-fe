@@ -20,7 +20,9 @@ const Chat = () => {
   const { name, room } = Object.fromEntries(searchParams);
 
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, {
+      withCredentials: true,
+    });
     socket.emit("join", { name, room });
 
     return () => {
