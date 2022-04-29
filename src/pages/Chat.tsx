@@ -27,16 +27,19 @@ const Chat = () => {
       socket.emit("disconnect");
       socket.off();
     };
-  }, [name, room, searchParams]);
+  }, [name, room]);
 
   useEffect(() => {
-    socket.on("message", (message: Message) => {
+    const handlerNewMessage = (message: Message) => {
       if (message.user === "admin") {
         toast(`🦄 ${message.text}`);
       } else {
         setMessages([...messages, message]);
       }
-    });
+    };
+
+    socket.on("message", handlerNewMessage);
+    return () => socket.off("message", handlerNewMessage);
   }, [messages]);
 
   //handle text

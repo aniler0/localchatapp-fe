@@ -5,7 +5,6 @@ type MessageFieldProps = {
   messages: Message[];
   user: string;
 };
-
 const MessageField: React.FC<MessageFieldProps> = ({ messages, user }) => {
   return (
     <S.MessageField>
