@@ -10,6 +10,8 @@ export const MessageField = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: auto;
+  padding: 0.5em 1em;
 `;
 export const MessageBox = styled.div<MessageType>`
   margin-top: 12px;
