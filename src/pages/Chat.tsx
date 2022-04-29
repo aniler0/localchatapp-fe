@@ -12,9 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 let socket: any;
 const ENDPOINT: string = process.env.REACT_APP_ENDPOINT as string;
-socket = io(ENDPOINT, {
-  withCredentials: true,
-});
 
 const Chat = () => {
   const [message, setMessage] = useState<string>("");
@@ -23,20 +20,21 @@ const Chat = () => {
   const { name, room } = Object.fromEntries(searchParams);
 
   useEffect(() => {
+    socket = io(ENDPOINT);
     socket.emit("join", { name, room });
 
     return () => {
       socket.emit("disconnect");
       socket.off();
     };
-  }, [name, room]);
+  }, [name, room, searchParams]);
 
   useEffect(() => {
     socket.on("message", (message: Message) => {
       if (message.user === "admin") {
         toast(`🦄 ${message.text}`);
       } else {
-        setMessages((prevMessages) => [...prevMessages, message]);
+        setMessages([...messages, message]);
       }
     });
   }, [messages]);
