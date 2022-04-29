@@ -4,13 +4,16 @@ import React, { useEffect, useState } from "react";
 import { Header, Input, MessageField } from "components";
 import { Emoji } from "components/Icons";
 import * as S from "../styles/pages/Chat";
+import { toast, ToastContainer } from "react-toastify";
+import { Message } from "types/Message";
+import "react-toastify/dist/ReactToastify.css";
 
 let socket: any;
 const ENDPOINT = "http://localhost:5000";
 socket = io(ENDPOINT);
 const Chat = () => {
   const [message, setMessage] = useState<string>("");
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [searchParams] = useSearchParams();
   const { name, room } = Object.fromEntries(searchParams);
 
@@ -24,12 +27,19 @@ const Chat = () => {
   }, [name, room]);
 
   useEffect(() => {
-    socket.on("message", (message: string) => {
-      setMessages([...messages, message]);
+    socket.on("message", (message: Message) => {
+      if (message.user === "admin") {
+        toast(`🦄 ${message.text}`);
+      } else {
+        setMessages([...messages, message]);
+      }
     });
   }, [messages]);
+
+  //handle text
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
+    console.log(messages);
   };
 
   // function for sending messages
@@ -40,27 +50,39 @@ const Chat = () => {
         setMessage("");
       }
     });
-    console.log(messages);
   };
 
   return (
-    <S.ChatContainer>
-      <S.Chat>
-        <Header>{room}</Header>
-        <MessageField />
-        <form onSubmit={sendMessage}>
-          <Input
-            name="textmessage"
-            value={message}
-            onChange={handleChange}
-            textMessageField
-            sendMessage={sendMessage}
-            placeholder="Start typing..."
-            icon={<Emoji />}
-          />
-        </form>
-      </S.Chat>
-    </S.ChatContainer>
+    <>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+      />
+      <S.ChatContainer>
+        <S.Chat>
+          <Header>{room}</Header>
+          {<MessageField user={name} messages={messages} />}
+          <form onSubmit={sendMessage}>
+            <Input
+              name="textmessage"
+              value={message}
+              onChange={handleChange}
+              textMessageField
+              sendMessage={sendMessage}
+              placeholder="Start typing..."
+              icon={<Emoji />}
+            />
+          </form>
+        </S.Chat>
+      </S.ChatContainer>
+    </>
   );
 };
 
