@@ -36,7 +36,7 @@ const Chat = () => {
       if (message.user === "admin") {
         toast(`🦄 ${message.text}`);
       } else {
-        setMessages([...messages, message]);
+        setMessages((prevMessages) => [...prevMessages, message]);
       }
     });
   }, [messages]);
