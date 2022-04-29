@@ -1,17 +1,21 @@
+import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { useSearchParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+
 import { Header, Input, MessageField } from "components";
 import { Emoji } from "components/Icons";
-import * as S from "../styles/pages/Chat";
-import { toast, ToastContainer } from "react-toastify";
 import { Message } from "types/Message";
+import * as S from "../styles/pages/Chat";
+
 import "react-toastify/dist/ReactToastify.css";
 
 let socket: any;
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT: string = process.env.REACT_APP_ENDPOINT as string;
 socket = io(ENDPOINT);
+
 const Chat = () => {
+  console.log(process.env.REACT_APP_ENDPOINT);
   const [message, setMessage] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [searchParams] = useSearchParams();
@@ -39,7 +43,6 @@ const Chat = () => {
   //handle text
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
-    console.log(messages);
   };
 
   // function for sending messages

@@ -1,7 +1,9 @@
-import { Button, Input } from "components";
-import { Profile, World } from "components/Icons";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { Button, Input } from "components";
+import { Profile, World } from "components/Icons";
+
 import * as S from "../styles/pages/Login";
 
 const Login = () => {
