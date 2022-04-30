@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 
 type HeaderProps = {
@@ -5,10 +6,11 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ children }) => {
+  const navigation = useNavigate();
   return (
     <S.HeaderContainer>
       {children}
-      <S.StyledKebab />
+      <S.StyledKebab onClick={() => navigation("/")} />
     </S.HeaderContainer>
   );
 };
